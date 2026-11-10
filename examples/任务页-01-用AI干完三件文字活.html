@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>用 AI 干完三件文字活｜打工人的 AI 入门实战任务 01</title>
+<meta name="description" content="下班前你要发三样东西，这次<b>全部先让 AI 出稿</b>，你只挑版本、改一句、标类别。">
+<!--
+  ══════════════════════════════════════════════════════════════
+  实战任务页 · 单文件模板（方块科技风，UI 沿用 learning-page-builder）
+  用法：整份复制 → 填完所有双花括号占位符 → 交付前 grep 双花括号必须为空
+  六块必备：任务名称 / 场景与对象 / 任务目标 / 步骤（流程图）/ 验收标准 / 常见错误
+  另带：AI 分工、交付物 + 布置语
+  ══════════════════════════════════════════════════════════════
+-->
+<style>
+:root{
+  --bg:#ffffff; --surface:#f4f4f4; --card:#ffffff;
+  --ink:#111111; --muted:#6b6b6b;
+  --accent:#1a4be0; --accent-rgb:26,75,224; --accent-ink:#ffffff;
+  --hairline:#e6e6e6;
+  --r-card:14px; --r-sm:10px; --r-ctl:12px; --r-chip:8px;
+  --fs-h1:clamp(30px,4.4vw,54px);
+  --fs-h2:clamp(23px,2.6vw,34px);
+  --fs-lead:clamp(17px,1.5vw,20px);
+  --fs-body:17px; --fs-table:16px; --fs-sub:15px; --fs-note:13px;
+  --font:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",Roboto,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --pad:clamp(18px,4.6vw,48px); --shell:1120px;
+  --gap:clamp(48px,6vw,88px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d1017; --surface:#171c26; --card:#1e2531;
+    --ink:#f3f5f8; --muted:#9aa4b2;
+    --accent:#5b7cff; --accent-rgb:91,124,255; --accent-ink:#0b0e14;
+    --hairline:#2a3242;
+  }
+}
+[data-theme="dark"]{
+  --bg:#0d1017; --surface:#171c26; --card:#1e2531;
+  --ink:#f3f5f8; --muted:#9aa4b2;
+  --accent:#5b7cff; --accent-rgb:91,124,255; --accent-ink:#0b0e14;
+  --hairline:#2a3242;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);
+  font-size:var(--fs-body);line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,ul,ol,figure{margin:0}
+img,svg{max-width:100%}
+button{font-family:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.shell{max-width:var(--shell);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+
+/* 入场：尊重 reduced-motion */
+[data-rv]{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease;transition-delay:var(--d,0ms)}
+[data-rv].in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  [data-rv]{opacity:1;transform:none;transition:none}
+  *{animation-duration:.001ms !important;transition-duration:.001ms !important}
+}
+
+/* ── 顶栏 ── */
+.topbar{border-bottom:1.5px solid var(--hairline);background:var(--bg)}
+.topbar .shell{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  min-height:64px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:var(--fs-sub);letter-spacing:.02em}
+.brand i{width:14px;height:14px;background:var(--accent);display:inline-block}
+.brand span{color:var(--muted);font-weight:600}
+.topno{font:800 var(--fs-note)/1 var(--mono);letter-spacing:.14em;color:var(--accent)}
+
+/* ── 任务头（紧凑，不占满一屏）── */
+.hero{padding-top:clamp(34px,5vw,64px);padding-bottom:clamp(26px,3.4vw,42px)}
+.eyebrow{font:800 var(--fs-note)/1 var(--mono);letter-spacing:.14em;color:var(--accent);margin-bottom:clamp(12px,1.6vw,18px)}
+.hero h1{font-size:var(--fs-h1);line-height:1.06;letter-spacing:-.025em;font-weight:800;max-width:18ch}
+.one-line{font-size:var(--fs-lead);line-height:1.6;margin-top:clamp(14px,2vw,20px);max-width:34em}
+.one-line b{font-weight:800;box-shadow:inset 0 -.5em 0 rgba(var(--accent-rgb),.14)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(18px,2.4vw,26px)}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;background:var(--surface);
+  border-radius:var(--r-chip);font-size:var(--fs-note);font-weight:700;color:var(--ink)}
+.chip.k{background:var(--accent);color:var(--accent-ink)}
+.chip em{font-style:normal;color:var(--muted);font-weight:600}
+.chip.k em{color:inherit;opacity:.82}
+
+/* ── 通用段落 ── */
+.sec{padding-top:var(--gap);padding-bottom:var(--gap);border-top:1.5px solid var(--hairline)}
+.sec-h{font-size:var(--fs-h2);line-height:1.15;letter-spacing:-.02em;font-weight:800;margin-bottom:clamp(14px,1.8vw,22px);max-width:24ch}
+.sec-note{font-size:var(--fs-sub);color:var(--muted);margin-bottom:clamp(18px,2.4vw,26px);max-width:40em}
+
+/* ── 场景四格 ── */
+.scene{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.scene-card{background:var(--card);border:1.5px solid var(--hairline);border-radius:var(--r-card);padding:16px 18px}
+.scene-card h3{font-size:var(--fs-note);font-weight:800;letter-spacing:.06em;color:var(--muted);margin-bottom:8px}
+.scene-card p{font-size:var(--fs-table);line-height:1.7}
+
+/* ── AI 分工 ── */
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:14px}
+.split-col{border-radius:var(--r-card);padding:16px 18px;border:1.5px solid var(--hairline);background:var(--card)}
+.split-col.ai{background:rgba(var(--accent-rgb),.06);border-color:rgba(var(--accent-rgb),.35)}
+.split-col h3{font-size:var(--fs-note);font-weight:800;letter-spacing:.06em;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.split-col h3 i{width:10px;height:10px;background:var(--accent);display:inline-block}
+.split-col p{font-size:var(--fs-table);line-height:1.7}
+.split-col small{display:block;margin-top:10px;font-size:var(--fs-note);color:var(--muted)}
+
+/* ── 目标 ── */
+.goals{list-style:none;padding:0;display:grid;gap:12px;max-width:44em}
+.goals li{display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:start;
+  padding:14px 16px;background:var(--surface);border-radius:var(--r-sm)}
+.goals b{font:800 var(--fs-note)/1 var(--mono);color:var(--accent);padding-top:3px}
+.goals span{font-size:var(--fs-table);line-height:1.7}
+
+/* ── 流程图 ── */
+.flow-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.flow-ctrl{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.btn{appearance:none;border:0;border-radius:var(--r-ctl);background:var(--ink);color:var(--bg);
+  font:inherit;font-weight:700;font-size:var(--fs-sub);padding:12px 18px;min-height:46px;cursor:pointer;
+  transition:transform .18s ease,background .18s ease,color .18s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn.blue{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:var(--card);color:var(--ink);border:1.5px solid var(--hairline)}
+.play-note{font-size:var(--fs-note);color:var(--muted)}
+
+.flow-track{display:grid;grid-template-columns:1fr auto 1fr;align-items:stretch;gap:0}
+.flow-node{appearance:none;text-align:left;background:var(--card);border:1.5px solid var(--hairline);
+  border-radius:var(--r-card);padding:18px 18px 16px;cursor:pointer;display:grid;gap:8px;
+  transition:background .3s ease,border-color .3s ease,color .3s ease}
+.flow-node .fn-num{font:800 var(--fs-note)/1 var(--mono);letter-spacing:.14em;color:var(--accent);transition:color .3s}
+.flow-node .fn-t{font-size:var(--fs-lead);font-weight:800;line-height:1.3}
+.flow-node .fn-m{font-size:var(--fs-note);color:var(--muted);transition:color .3s}
+.flow-node:hover{border-color:rgba(var(--accent-rgb),.5)}
+.flow-node[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.flow-node[aria-pressed="true"] .fn-num,
+.flow-node[aria-pressed="true"] .fn-m{color:var(--accent-ink);opacity:.85}
+.flow-arrow{position:relative;align-self:center;width:clamp(24px,3.4vw,56px);height:2px;background:var(--hairline);transition:background .3s}
+.flow-arrow::after{content:'';position:absolute;right:-1px;top:-4px;width:0;height:0;
+  border-left:9px solid var(--hairline);border-top:5px solid transparent;border-bottom:5px solid transparent;transition:border-color .3s}
+.flow-arrow.on{background:var(--accent)}
+.flow-arrow.on::after{border-left-color:var(--accent)}
+@media (max-width:720px){
+  .flow-track{grid-template-columns:1fr;gap:0}
+  .flow-arrow{width:2px;height:clamp(22px,5vw,34px);margin:0 auto;align-self:auto}
+  .flow-arrow::after{right:auto;left:-4px;top:auto;bottom:-1px;
+    border-left:5px solid transparent;border-right:5px solid transparent;
+    border-top:9px solid var(--hairline);border-bottom:0}
+  .flow-arrow.on::after{border-top-color:var(--accent)}
+}
+
+.step-panel{display:none;margin-top:20px;background:var(--card);border:1.5px solid var(--hairline);
+  border-radius:var(--r-card);padding:clamp(18px,2.4vw,26px)}
+.step-panel.on{display:block}
+.step-panel h3{font-size:var(--fs-lead);font-weight:800;margin-bottom:12px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.step-panel h3 em{font:800 var(--fs-note)/1 var(--mono);color:var(--accent);letter-spacing:.12em;font-style:normal}
+.step-panel .kv{display:grid;gap:12px}
+.step-panel .kv div{display:grid;grid-template-columns:88px 1fr;gap:12px;align-items:start}
+.step-panel .kv dt,.step-panel .kv span.k{font-size:var(--fs-note);font-weight:800;color:var(--muted);letter-spacing:.04em;padding-top:5px}
+.step-panel .kv p{font-size:var(--fs-table);line-height:1.75}
+.step-panel .check{margin-top:16px;padding:12px 14px;background:rgba(var(--accent-rgb),.07);
+  border-left:3px solid var(--accent);border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:var(--fs-sub);line-height:1.7}
+.step-panel .check b{font-weight:800}
+@media (max-width:560px){.step-panel .kv div{grid-template-columns:1fr;gap:2px}}
+
+/* ── 验收表 ── */
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1.5px solid var(--hairline);border-radius:var(--r-card)}
+table{border-collapse:collapse;width:100%;min-width:560px}
+th,td{text-align:left;padding:13px 16px;font-size:var(--fs-table);line-height:1.65;vertical-align:top;border-bottom:1.5px solid var(--hairline)}
+th{background:var(--surface);font-size:var(--fs-note);font-weight:800;letter-spacing:.04em;color:var(--muted);white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td:first-child{font-weight:700;white-space:nowrap}
+
+/* ── 常见错误 ── */
+.errs{display:grid;gap:12px}
+.err{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--hairline);
+  border:1.5px solid var(--hairline);border-radius:var(--r-card);overflow:hidden}
+.err>div{background:var(--card);padding:14px 16px}
+.err .bad{background:var(--surface)}
+.err h4{font-size:var(--fs-note);font-weight:800;letter-spacing:.06em;color:var(--muted);margin-bottom:6px}
+.err p{font-size:var(--fs-table);line-height:1.7}
+.err .why{grid-column:1/-1;font-size:var(--fs-note);color:var(--muted);background:var(--card);padding-top:0}
+@media (max-width:620px){.err{grid-template-columns:1fr}}
+
+/* ── 交付物 ── */
+.deliver{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:20px}
+.deliver .box{background:var(--surface);border-radius:var(--r-card);padding:16px 18px}
+.deliver h3{font-size:var(--fs-note);font-weight:800;letter-spacing:.06em;color:var(--muted);margin-bottom:8px}
+.deliver p{font-size:var(--fs-table);line-height:1.7}
+.brief{margin:0;padding:16px 18px;background:var(--ink);color:var(--bg);border-radius:var(--r-card);
+  font:14px/1.85 var(--mono);white-space:pre-wrap;word-break:break-word}
+.copy-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:12px}
+.copy-status{font-size:var(--fs-note);color:var(--muted)}
+
+/* ── 页脚 ── */
+.foot{border-top:1.5px solid var(--hairline);padding:26px 0 40px;margin-top:var(--gap)}
+.foot .shell{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center}
+.foot p{font-size:var(--fs-note);color:var(--muted);max-width:44em}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="shell">
+    <div class="brand"><i aria-hidden="true"></i>奈势 AI<span>· 打工人的 AI 入门</span></div>
+    <div class="topno">TASK 01</div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="shell">
+    <p class="eyebrow" data-rv>实战任务 01 / 14</p>
+    <h1 data-rv style="--d:60ms">用 AI 干完三件文字活</h1>
+    <p class="one-line" data-rv style="--d:120ms">下班前你要发三样东西，这次<b>全部先让 AI 出稿</b>，你只挑版本、改一句、标类别。</p>
+    <div class="chips" data-rv style="--d:180ms">
+      <span class="chip k"><em>用时</em>20 分钟</span>
+      <span class="chip"><em>难度</em>T1</span>
+      <span class="chip"><em>步骤</em>2 步</span>
+      <span class="chip"><em>交付</em>docx</span>
+      <span class="chip"><em>类型</em>内容生产型</span>
+    </div>
+  </div>
+</header>
+
+<!-- ① 场景与对象 -->
+<section class="sec">
+  <div class="shell">
+    <h2 class="sec-h" data-rv>这件事，落在谁身上</h2>
+    <div class="scene">
+      <div class="scene-card" data-rv><h3>你是谁</h3><p>内容运营，一个人管公众号、活动和一堆跨部门沟通。</p></div>
+      <div class="scene-card" data-rv style="--d:60ms"><h3>你在帮谁</h3><p>等这三样东西才能收工的自己，还有被你催稿的设计部同事。</p></div>
+      <div class="scene-card" data-rv style="--d:120ms"><h3>现在卡在哪</h3><p>会议记录靠回忆补，催稿消息改七遍还是像吵架，行业词自己也没把握——三样都要在下班前发出去。</p></div>
+      <div class="scene-card" data-rv style="--d:180ms"><h3>用在哪</h3><p>三样分别发在部门群、私聊窗口和明天开会要用的那一页上。</p></div>
+    </div>
+    <div class="split">
+      <div class="split-col ai" data-rv>
+        <h3><i aria-hidden="true"></i>AI 干什么</h3>
+        <p>三份初稿全由 AI 出：整理一段散会记录、把催稿消息改成三个口气、用一个打工人听得懂的例子解释行业词。</p>
+        <small>产出主体在 AI 这边。你不给它材料和要求，它就出不来。</small>
+      </div>
+      <div class="split-col" data-rv style="--d:80ms">
+        <h3>你只干什么</h3>
+        <p>只有三件事——挑一版、改一句（补 AI 不知道的现场情况）、标出它属于哪类 AIGC。</p>
+        <small>把 AI 从流程里抽掉，这件事就做不完——所以这是 AI 实战，不是手工活练习。</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ② 任务目标 -->
+<section class="sec">
+  <div class="shell">
+    <h2 class="sec-h" data-rv>做完你能做到这三件</h2>
+    <ul class="goals">
+      <li data-rv><b>01</b><span>用同一套动作（给材料 → 说要求 → 出稿）把三件文字活交给 AI，每件都拿到能直接发的初稿。</span></li>
+      <li data-rv style="--d:60ms"><b>02</b><span>每件至少改一处，并说清改的是「AI 不知道的现场情况」还是「口气不对」。</span></li>
+      <li data-rv style="--d:120ms"><b>03</b><span>指出三件活同属文生文，并说出身边哪三件事是判别式 AI 干的。</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ③ 步骤（流程图） -->
+<section class="sec" id="steps">
+  <div class="shell">
+    <div class="flow-head">
+      <h2 class="sec-h" style="margin:0" data-rv>两步走完</h2>
+      <div class="flow-ctrl" data-rv>
+        <button type="button" class="btn blue" id="playFlow">播放步骤</button>
+        <span class="play-note" id="playNote" role="status" aria-live="polite">点节点可以直接看那一步</span>
+      </div>
+    </div>
+    <div class="flow-track" data-rv>
+      <button type="button" class="flow-node" data-step="1" aria-pressed="true">
+        <span class="fn-num">01</span>
+        <span class="fn-t">三件活一起发</span>
+        <span class="fn-m">12 分钟</span>
+      </button>
+      <span class="flow-arrow on" aria-hidden="true"></span>
+      <button type="button" class="flow-node" data-step="2" aria-pressed="false">
+        <span class="fn-num">02</span>
+        <span class="fn-t">挑、改、标</span>
+        <span class="fn-m">8 分钟</span>
+      </button>
+    </div>
+
+    <div class="step-panel on" data-panel="1">
+      <h3><em>STEP 01</em>三件活一起发<span style="font-size:var(--fs-note);color:var(--muted);font-weight:600">12 分钟</span></h3>
+      <div class="kv">
+        <div><span class="k">做什么</span><p>把三份材料分别丢给 AI，一件一条消息，不要合在一条里。三份初稿原样存下来，不许自己先写。</p></div>
+        <div><span class="k">怎么提</span><p>会议记录：「整理成决策、待办、负责人三栏，不写讨论过程。」催稿：「改成更客气、更简短、更有说服力三个版本，对方是平级同事，已经拖了两次，下周一必须上线。」行业词：「用一个打工人能懂的例子解释它，别用术语。」</p></div>
+      </div>
+      <p class="check"><b>检查点：</b>三份都是 AI 的原始输出，看得出是它写的，不是你写完让它润色。</p>
+    </div>
+
+    <div class="step-panel" data-panel="2">
+      <h3><em>STEP 02</em>挑、改、标<span style="font-size:var(--fs-note);color:var(--muted);font-weight:600">8 分钟</span></h3>
+      <div class="kv">
+        <div><span class="k">做什么</span><p>每件挑一版，改一到两句，重点补 AI 猜不到的现场情况：谁真的负责、稿子卡在哪一步。最后给三件标类别。</p></div>
+        <div><span class="k">怎么核</span><p>对着三份初稿逐件看：这一处改了什么、为什么必须改。改不动的说明 AI 已经写到位，也要写一句「这版能直接用」。</p></div>
+      </div>
+      <p class="check"><b>检查点：</b>三件各有一处你的改动，且说得清为什么改；末尾一行写出「哪一步不是生成式 AI 干的」。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ④ 验收标准 -->
+<section class="sec">
+  <div class="shell">
+    <h2 class="sec-h" data-rv>怎么算过</h2>
+    <p class="sec-note" data-rv>交付前对着这张表逐条看一遍。达标的线是「别人拿到就能用」，不是「我觉得还行」。</p>
+    <div class="tbl-wrap" data-rv style="--d:60ms">
+      <table>
+        <thead>
+          <tr><th scope="col">维度</th><th scope="col">达标</th><th scope="col">优秀</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>内容来源</td><td>三份初稿都来自 AI，看得出 AI 的原话</td><td>还留了当时的提示词，别人能照着复现同样的稿子</td></tr>
+          <tr><td>人工改动</td><td>每件至少 1 处改动，并注明是补信息还是改口气</td><td>改完能说清「AI 弱在哪一环」，下次直接补给它</td></tr>
+          <tr><td>概念判断</td><td>三件都标成文生文，并写出一句判别式与生成式 AI 的区别</td><td>能当场举出身边三个判别式 AI 的例子（推荐、审核、识别）</td></tr>
+          <tr><td>能直接发</td><td>三件都能直接发出去，不是半成品</td><td>收件人回复里没有追问「这是什么意思」</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ 常见错误 -->
+<section class="sec">
+  <div class="shell">
+    <h2 class="sec-h" data-rv>三个最容易踩的坑</h2>
+    <div class="errs">
+      <div class="err" data-rv>
+        <div class="bad"><h4>错误动作</h4><p>自己先写完，再让 AI 润色一遍。</p></div>
+        <div><h4>正确做法</h4><p>先给材料和一条要求，让 AI 出整版；你只补它猜不到的现场情况。</p></div>
+        <p class="why">把 AI 当橡皮，练的是改错别字，不是让它干活。</p>
+      </div>
+      <div class="err" data-rv style="--d:60ms">
+        <div class="bad"><h4>错误动作</h4><p>三件都只丢一句话，不给材料。</p></div>
+        <div><h4>正确做法</h4><p>材料、要求、交付形态三样说全，一件一条消息。</p></div>
+        <p class="why">它不知道你同事已经拖了两次，你不写，它就只能写客套话。</p>
+      </div>
+      <div class="err" data-rv style="--d:120ms">
+        <div class="bad"><h4>错误动作</h4><p>改完不写理由。</p></div>
+        <div><h4>正确做法</h4><p>每处改动旁标一句「补了什么信息 / 换了什么口气」。</p></div>
+        <p class="why">说不清 AI 哪里不如你，下次还是只能凭感觉试。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ 交付物 + 布置语 -->
+<section class="sec">
+  <div class="shell">
+    <h2 class="sec-h" data-rv>交什么</h2>
+    <div class="deliver">
+      <div class="box" data-rv><h3>唯一产出物</h3><p>《三件活对照卡》1 页，四列：活 ｜ AI 初稿 ｜ 我改了什么、为什么 ｜ AIGC 类别，末尾一行结论。</p></div>
+      <div class="box" data-rv style="--d:60ms"><h3>提交格式</h3><p>docx 文件，文件名写「三件活对照卡-你的名字.docx」。不要交截图、不要交聊天记录。</p></div>
+    </div>
+    <pre class="brief" id="taskBrief" data-rv tabindex="0" aria-label="可直接复制到群里的布置语">任务：把今天手边的三件文字活（散会记录、催稿消息、一个听不懂的行业词）全部先交给 AI 出稿，你再挑一版改一句；请提交 docx 格式的《三件活对照卡》（表格四列：活｜AI 初稿｜我改了什么、为什么｜属于哪类 AIGC），末尾一行写「这三件里，哪一步不是生成式 AI 干的」。</pre>
+    <div class="copy-row" data-rv>
+      <button type="button" class="btn ghost" id="copyBrief">复制布置语</button>
+      <span class="copy-status" id="copyStatus" role="status" aria-live="polite"></span>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="shell">
+    <div class="brand"><i aria-hidden="true"></i>奈势 AI</div>
+    <p>教学示意：页面中的材料、人数、时间均为演示用途，不对应某家公司的真实数据。</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function R(ms){ return REDUCED ? 0 : ms; }
+
+  /* 入场 */
+  var rv = document.querySelectorAll('[data-rv]');
+  if ('IntersectionObserver' in window && !REDUCED) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+    rv.forEach(function(el){ io.observe(el); });
+  } else {
+    rv.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* 步骤流程图：点节点切详情 + 播放 */
+  var nodes = Array.prototype.slice.call(document.querySelectorAll('.flow-node'));
+  var arrows = Array.prototype.slice.call(document.querySelectorAll('.flow-arrow'));
+  var panels = Array.prototype.slice.call(document.querySelectorAll('.step-panel'));
+  var playBtn = $('playFlow');
+  var note = $('playNote');
+  var timer = [];
+
+  function clearTimers(){ timer.forEach(clearTimeout); timer = []; }
+
+  function showStep(n){
+    nodes.forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.step === String(n))); });
+    panels.forEach(function(p){ p.classList.toggle('on', p.dataset.panel === String(n)); });
+    arrows.forEach(function(a, i){ a.classList.toggle('on', i < (n - 1)); });
+  }
+
+  nodes.forEach(function(b){
+    b.addEventListener('click', function(){
+      clearTimers();
+      showStep(b.dataset.step);
+      if (note) note.textContent = '正在看第 ' + b.dataset.step + ' 步，点另一个节点可切换';
+    });
+  });
+
+  if (playBtn) {
+    playBtn.addEventListener('click', function(){
+      clearTimers();
+      if (REDUCED) { showStep(2); if (note) note.textContent = '已显示全部步骤'; return; }
+      showStep(1);
+      if (note) note.textContent = '第 1 步：' + (nodes[0] ? nodes[0].querySelector('.fn-t').textContent : '');
+      timer.push(setTimeout(function(){
+        showStep(2);
+        if (note) note.textContent = '第 2 步：' + (nodes[1] ? nodes[1].querySelector('.fn-t').textContent : '');
+      }, 1600));
+      timer.push(setTimeout(function(){
+        if (note) note.textContent = '两步走完，回到第 1 步可以重看';
+        playBtn.textContent = '再看一遍';
+      }, 2400));
+    });
+  }
+
+  /* 布置语一键复制（clipboard + execCommand 兜底） */
+  var copyBtn = $('copyBrief');
+  var statusEl = $('copyStatus');
+  function setStatus(t){ if (statusEl) statusEl.textContent = t; }
+  if (copyBtn && $('taskBrief')) {
+    copyBtn.addEventListener('click', function(){
+      var text = $('taskBrief').textContent;
+      function fallback(){
+        var ok = false;
+        var ta = document.createElement('textarea');
+        ta.value = text; ta.setAttribute('readonly','');
+        ta.style.position = 'fixed'; ta.style.left = '-9999px';
+        document.body.appendChild(ta); ta.select();
+        try { ok = document.execCommand('copy'); } catch(e){ ok = false; }
+        document.body.removeChild(ta);
+        setStatus(ok ? '已复制，可以贴到群里了。' : '复制失败，请手动选中布置语复制。');
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        var settled = false;
+        var guard = setTimeout(function(){ if (!settled) { settled = true; fallback(); } }, 900);
+        var p;
+        try { p = navigator.clipboard.writeText(text); }
+        catch(e){ settled = true; clearTimeout(guard); fallback(); return; }
+        p.then(function(){ if (settled) return; settled = true; clearTimeout(guard); setStatus('已复制，可以贴到群里了。'); },
+               function(){ if (settled) return; settled = true; clearTimeout(guard); fallback(); });
+      } else { fallback(); }
+    });
+  }
+})();
+</script>
+</body>
+</html>

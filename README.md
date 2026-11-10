@@ -29,6 +29,8 @@
 5. 教师备注（时间、脚手架、评分、常见错误、安全边界）
 6. 质量自检
 
+**下一步**：任务包确认后，可把每个任务做成一页自包含的**实战任务 HTML 页面**（一任务一页，含任务名、场景对象、目标、流程图步骤、验收标准、常见错误，配一键复制布置语）——说「出任务页」即可，规范见 `references/task-page-spec.md`。
+
 单任务标准版通常 150–250 行；不会默认生成巨型附件包。
 
 ## 用法
@@ -59,11 +61,14 @@ pbl-practice-task/
 ├── SKILL.md
 ├── README.md
 ├── assets/
-│   └── task-card-template.md
+│   ├── task-card-template.md
+│   └── task-page-template.html
 ├── references/
 │   ├── case-library.md
 │   ├── rubric-and-scaffolds.md
+│   ├── task-page-spec.md
 │   └── task-patterns.md
+├── examples/                 # 成页示例（任务包 + 任务页）
 └── evals/
     └── evals.json
 ```
