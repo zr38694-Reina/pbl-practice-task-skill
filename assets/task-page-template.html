@@ -9,8 +9,9 @@
   ══════════════════════════════════════════════════════════════
   实战任务页 · 单文件模板（方块科技风，UI 沿用 learning-page-builder）
   用法：整份复制 → 填完所有双花括号占位符 → 交付前 grep 双花括号必须为空
-  六块必备：任务名称 / 场景与对象 / 任务目标 / 步骤（流程图）/ 验收标准 / 常见错误
+  五块必备：任务名称 / 场景与对象 / 任务目标 / 步骤（流程图）/ 常见错误
   另带：AI 分工、交付物 + 布置语
+  不含验收标准：验收表留在任务包的教师备注里，页面只给学员看要做什么。
   ══════════════════════════════════════════════════════════════
 -->
 <style>
@@ -160,14 +161,6 @@ button{font-family:inherit}
 .step-panel .check b{font-weight:800}
 @media (max-width:560px){.step-panel .kv div{grid-template-columns:1fr;gap:2px}}
 
-/* ── 验收表 ── */
-.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1.5px solid var(--hairline);border-radius:var(--r-card)}
-table{border-collapse:collapse;width:100%;min-width:560px}
-th,td{text-align:left;padding:13px 16px;font-size:var(--fs-table);line-height:1.65;vertical-align:top;border-bottom:1.5px solid var(--hairline)}
-th{background:var(--surface);font-size:var(--fs-note);font-weight:800;letter-spacing:.04em;color:var(--muted);white-space:nowrap}
-tbody tr:last-child td{border-bottom:0}
-td:first-child{font-weight:700;white-space:nowrap}
-
 /* ── 常见错误 ── */
 .errs{display:grid;gap:12px}
 .err{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--hairline);
@@ -300,28 +293,7 @@ td:first-child{font-weight:700;white-space:nowrap}
   </div>
 </section>
 
-<!-- ④ 验收标准 -->
-<section class="sec">
-  <div class="shell">
-    <h2 class="sec-h" data-rv>怎么算过</h2>
-    <p class="sec-note" data-rv>交付前对着这张表逐条看一遍。达标的线是「别人拿到就能用」，不是「我觉得还行」。</p>
-    <div class="tbl-wrap" data-rv style="--d:60ms">
-      <table>
-        <thead>
-          <tr><th scope="col">维度</th><th scope="col">达标</th><th scope="col">优秀</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>{{R1_K}}</td><td>{{R1_OK}}</td><td>{{R1_TOP}}</td></tr>
-          <tr><td>{{R2_K}}</td><td>{{R2_OK}}</td><td>{{R2_TOP}}</td></tr>
-          <tr><td>{{R3_K}}</td><td>{{R3_OK}}</td><td>{{R3_TOP}}</td></tr>
-          <tr><td>{{R4_K}}</td><td>{{R4_OK}}</td><td>{{R4_TOP}}</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<!-- ⑤ 常见错误 -->
+<!-- ④ 常见错误 -->
 <section class="sec">
   <div class="shell">
     <h2 class="sec-h" data-rv>三个最容易踩的坑</h2>
@@ -345,7 +317,7 @@ td:first-child{font-weight:700;white-space:nowrap}
   </div>
 </section>
 
-<!-- ⑥ 交付物 + 布置语 -->
+<!-- ⑤ 交付物 + 布置语 -->
 <section class="sec">
   <div class="shell">
     <h2 class="sec-h" data-rv>交什么</h2>
