@@ -12,6 +12,7 @@
   五块必备：任务名称 / 场景与对象 / 任务目标 / 步骤（流程图）/ 常见错误
   另带：AI 分工、交付物 + 布置语
   不含验收标准：验收表留在任务包的教师备注里，页面只给学员看要做什么。
+  品牌行用 {{LOGO}}：课程品牌 logo 的 base64 data URI（黑字版配白底，高度 24px），不引外部图片。
   ══════════════════════════════════════════════════════════════
 -->
 <style>
@@ -68,6 +69,7 @@ button{font-family:inherit}
   min-height:64px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:var(--fs-sub);letter-spacing:.02em}
 .brand i{width:14px;height:14px;background:var(--accent);display:inline-block}
+.brand .logo{height:24px;width:auto;display:block}
 .brand span{color:var(--muted);font-weight:600}
 .topno{font:800 var(--fs-note)/1 var(--mono);letter-spacing:.14em;color:var(--accent)}
 
@@ -192,7 +194,7 @@ button{font-family:inherit}
 
 <div class="topbar">
   <div class="shell">
-    <div class="brand"><i aria-hidden="true"></i>{{BRAND}}<span>· {{COURSE}}</span></div>
+    <div class="brand"><img class="logo" src="{{LOGO}}" alt="{{BRAND}} logo"><span>· {{COURSE}}</span></div>
     <div class="topno">TASK {{NO}}</div>
   </div>
 </div>
@@ -335,7 +337,7 @@ button{font-family:inherit}
 
 <footer class="foot">
   <div class="shell">
-    <div class="brand"><i aria-hidden="true"></i>{{BRAND}}</div>
+    <div class="brand"><img class="logo" src="{{LOGO}}" alt="{{BRAND}} logo"></div>
     <p>教学示意：页面中的材料、人数、时间均为演示用途，不对应某家公司的真实数据。</p>
   </div>
 </footer>
