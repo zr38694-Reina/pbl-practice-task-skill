@@ -165,14 +165,14 @@ button{font-family:inherit}
 
 /* ── 常见错误 ── */
 .errs{display:grid;gap:12px}
-.err{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--hairline);
+.err{display:grid;grid-template-columns:1fr 1fr;background:var(--card);
   border:1.5px solid var(--hairline);border-radius:var(--r-card);overflow:hidden}
 .err>div{background:var(--card);padding:14px 16px}
-.err .bad{background:var(--surface)}
+.err .bad{background:var(--surface);border-right:1.5px solid var(--hairline)}
 .err h4{font-size:var(--fs-note);font-weight:800;letter-spacing:.06em;color:var(--muted);margin-bottom:6px}
 .err p{font-size:var(--fs-table);line-height:1.7}
 .err .why{grid-column:1/-1;font-size:var(--fs-note);line-height:1.7;color:var(--muted);background:var(--card);padding:2px 16px 12px;margin:0}
-@media (max-width:620px){.err{grid-template-columns:1fr}}
+@media (max-width:620px){.err{grid-template-columns:1fr}.err .bad{border-right:0;border-bottom:1.5px solid var(--hairline)}}
 
 /* ── 交付物 ── */
 .deliver{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:20px}
