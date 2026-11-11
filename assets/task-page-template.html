@@ -12,7 +12,7 @@
   五块必备：任务名称 / 场景与对象 / 任务目标 / 步骤（流程图）/ 常见错误
   另带：AI 分工、交付物 + 布置语
   不含验收标准：验收表留在任务包的教师备注里，页面只给学员看要做什么。
-  品牌行用 {{LOGO}}：课程品牌 logo 的 base64 data URI（黑字版配白底，高度 24px），不引外部图片。
+  品牌行用 LOGO 占位符填：课程品牌 logo 的 base64 data URI（黑字版配白底，高度 24px），不引外部图片。
   ══════════════════════════════════════════════════════════════
 -->
 <style>
@@ -171,7 +171,7 @@ button{font-family:inherit}
 .err .bad{background:var(--surface)}
 .err h4{font-size:var(--fs-note);font-weight:800;letter-spacing:.06em;color:var(--muted);margin-bottom:6px}
 .err p{font-size:var(--fs-table);line-height:1.7}
-.err .why{grid-column:1/-1;font-size:var(--fs-note);color:var(--muted);background:var(--card);padding-top:0}
+.err .why{grid-column:1/-1;font-size:var(--fs-note);line-height:1.7;color:var(--muted);background:var(--card);padding:2px 16px 12px;margin:0}
 @media (max-width:620px){.err{grid-template-columns:1fr}}
 
 /* ── 交付物 ── */
